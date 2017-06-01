@@ -248,36 +248,28 @@ class Login:
     obj = json.loads(response.read().decode())
     self.friends = obj['result']
   
+  # 登录成功后执行的函数
   def loginSuccess(self):
-    # 发送数据
-    item = getGName(self.gnamelist, 'M|D|Z|Z')
+    pass
+
+  def initSuccess(self):
+    self.getFriends()
+    self.getGroup()
+    self.loginSuccess()
+  
+  # 获取数据
+  def getMessage(self):
     data = urllib.parse.urlencode({
-      'r': '{"group_uin":' + str(item['gid']) + ',"content":"' +
-           '[\\"（123456）\\",[\\"font\\",{\\"name\\":\\"宋体\\",\\"size\\":10,\\"style\\":[0,0,0],\\"color\\":\\"000000\\"}]]",' +
-           '"face":333,"clientid":53999199,"msg_id":' + str(msgId()) + ',"psessionid":"' + self.psessionid + '"}',
+      'r': '{"ptwebqq": "' + self.ptwebqq + '", "clientid": 53999199, "psessionid": "' + self.psessionid + '", "key": ""}'
     })
-    request = urllib.request.Request(api['send'], data=data.encode('utf-8'), headers={
-      'Referer': 'https://d1.web2.qq.com/cfproxy.html?v=20151105001&callback=1',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Connection': 'keep-alive',
-      'User-Agent': USER_AGENT,
-    })
-    response = self.opener.open(request) # {"errCode":0,"msg":"send ok"}
-    
-    # 请求数据
-    """
-    data = urllib.parse.urlencode({
-      'r': {"ptwebqq":"' + self.ptwebqq + '","clientid":53999199,"psessionid":"' + self.psessionid + '","key":""}
-    })
-    request = urllib.request.Request(api['poll2'], data=data.encode(), headers={
+    request = urllib.request.Request(api['poll2'], data=data.encode('utf-8'), headers={
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'd1.web2.qq.com',
       'Origin': 'https://d1.web2.qq.com',
       'Referer': 'https://d1.web2.qq.com/cfproxy.html?v=20151105001&callback=1',
     })
     response = self.opener.open(request)
-    print(response.read().decode())
-    
+    """
     result[0]:
       poll_type: "group_message"
       value:
@@ -290,15 +282,27 @@ class Login:
         time: 1496305408
         to_uin:
     """
-  
-  def initSuccess(self):
-    self.getFriends()
-    self.getGroup()
-    self.loginSuccess()
+    obj = json.loads(response.read().decode())
+    return obj
+    
+  # 发送数据
+  def sendGroupMessage(self, groupName, message):
+    # 发送数据
+    item = getGName(self.gnamelist, groupName)
+    data = urllib.parse.urlencode({
+      'r': '{"group_uin":' + str(item['gid']) + ',"content":"' +
+           '[\\"' + message + '\\",[\\"font\\",{\\"name\\":\\"宋体\\",\\"size\\":10,\\"style\\":[0,0,0],\\"color\\":\\"000000\\"}]]",' +
+           '"face":333,"clientid":53999199,"msg_id":' + str(msgId()) + ',"psessionid":"' + self.psessionid + '"}',
+    })
+    request = urllib.request.Request(api['send'], data=data.encode('utf-8'), headers={
+      'Referer': 'https://d1.web2.qq.com/cfproxy.html?v=20151105001&callback=1',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Connection': 'keep-alive',
+      'User-Agent': USER_AGENT,
+    })
+    response = self.opener.open(request)  # {"errCode":0,"msg":"send ok"}
     
   # 初始化
   def init(self):
-    # 二维码
-    self.initPtQr()
-    # 登录轮询
-    self.timer.start()
+    self.initPtQr()     # 二维码
+    self.timer.start()  # 登录轮询
