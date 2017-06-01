@@ -277,6 +277,18 @@ class Login:
     })
     response = self.opener.open(request)
     print(response.read().decode())
+    
+    result[0]:
+      poll_type: "group_message"
+      value:
+        content[1]:               接收到的信息
+        from_uin: 1398039796      信息来自的群
+        group_code: 1398039796
+        msg_id: 27127
+        msg_type: 4
+        send_uin: 4129086259      发信息的群员的编号
+        time: 1496305408
+        to_uin:
     """
   
   def initSuccess(self):
