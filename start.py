@@ -4,7 +4,7 @@ import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 import smartqq.login
 
-# ui地址
+
 Ui_MainWindow, QtBaseClass = uic.loadUiType(os.getcwd() + '\\main.ui')
 
 
@@ -16,13 +16,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     Ui_MainWindow.__init__(self)
     self.setupUi(self)
 
-if __name__ == '__main__':
+# 初始化程序
+if __name__ == "__main__":
   app = QtWidgets.QApplication(sys.argv)
   window = MyApp()
+  login = smartqq.login.Login(window)
+  login.init()
   window.show()
   sys.exit(app.exec_())
-  # 登录
-  # login = smartqq.login.Login()
-  # login.init()
-  
-  

@@ -8,6 +8,7 @@ import random
 import threading
 import json
 import time
+from PyQt5 import QtGui
 from api import api
 
 USER_AGENT = 'user-agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'
@@ -86,7 +87,7 @@ def msgId():
   
 # 登录
 class Login:
-  def __init__(self):
+  def __init__(self, window):
     self.cookiejar = http.cookiejar.CookieJar()      # cookiejar
     self.opener = urllib.request.build_opener(       # opener
                   urllib.request.HTTPCookieProcessor(self.cookiejar))
@@ -106,6 +107,8 @@ class Login:
     
     self.state = 0                                   # 当前登录状态
     self.timer = threading.Timer(1, self.timerLogin) # 当前定时器
+    
+    self.window = window                             # window窗口实例
 
   ### 这部分用于二维码相关
 
@@ -123,6 +126,9 @@ class Login:
     file = open('./.cache/_ptqr_165x165.png', 'wb')
     file.write(self.image)
     file.close()
+    # PyQt@显示图片
+    path = QtGui.QPixmap('./.cache/_ptqr_165x165.png')
+    self.window.SmartQQ.setPixmap(path)
 
   # 计算令牌
   def getToken(self):
@@ -250,6 +256,9 @@ class Login:
   
   # 登录成功后执行的函数
   def loginSuccess(self):
+    # PyQt@图片改成登录信息
+    self.window.SmartQQ.setText('QQ：' + str(self.uin) + '\n用户名：' + self.name)
+    self.window.SmartQQ2.setText('')
     pass
 
   def initSuccess(self):
