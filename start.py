@@ -4,9 +4,7 @@ import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 import smartqq.login
 
-
 Ui_MainWindow, QtBaseClass = uic.loadUiType(os.getcwd() + '\\main.ui')
-
 
 # 定义函数类
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
