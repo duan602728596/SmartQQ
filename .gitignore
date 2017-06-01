@@ -3,3 +3,4 @@ __pycache__
 .cache/*.png
 build
 dist
+start.spec
