@@ -1,5 +1,4 @@
 # coding=utf8
-# 判断登录状态
 import urllib.request
 import urllib.parse
 import http.cookiejar
