@@ -259,7 +259,7 @@ class Login:
     # PyQt@图片改成登录信息
     self.window.SmartQQ.setText('QQ：' + str(self.uin) + '\n用户名：' + self.name)
     self.window.SmartQQ2.setText('')
-    pass
+    # 其他事件
 
   def initSuccess(self):
     self.getFriends()
