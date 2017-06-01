@@ -107,11 +107,6 @@ class Login:
     self.state = 0                                   # 当前登录状态
     self.timer = threading.Timer(1, self.timerLogin) # 当前定时器
 
-    # 二维码
-    self.initPtQr()
-    # 登录轮询
-    self.timer.start()
-
   ### 这部分用于二维码相关
 
   # 下载二维码图片
@@ -267,8 +262,7 @@ class Login:
       'Connection': 'keep-alive',
       'User-Agent': USER_AGENT,
     })
-    response = self.opener.open(request)
-    print(response.read().decode())
+    response = self.opener.open(request) # {"errCode":0,"msg":"send ok"}
     
     # 请求数据
     """
@@ -289,3 +283,10 @@ class Login:
     self.getFriends()
     self.getGroup()
     self.loginSuccess()
+    
+  # 初始化
+  def init(self):
+    # 二维码
+    self.initPtQr()
+    # 登录轮询
+    self.timer.start()
