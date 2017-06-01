@@ -120,7 +120,7 @@ class Login:
   
   # 将二维码图片写入缓存文件夹
   def writePtqr(self):
-    file = open('./.cache/_ptqr.png', 'wb')
+    file = open('./.cache/_ptqr_165x165.png', 'wb')
     file.write(self.image)
     file.close()
 

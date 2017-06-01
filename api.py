@@ -40,5 +40,5 @@ api = {
   
   # 获取数据接口
   # 请求方式：post
-  'poll2': 'https://d1.web2.qq.com/channel/poll2'
+  'poll2': 'https://d1.web2.qq.com/channel/poll2',
 }
