@@ -102,6 +102,7 @@ class Login:
     self.cip = None                                  # cip
     
     self.gnamelist = None                            # 获取群列表
+    self.friends = None                              # 获取在线好友列表
     
     self.state = 0                                   # 当前登录状态
     self.timer = threading.Timer(1, self.timerLogin) # 当前定时器
@@ -240,13 +241,24 @@ class Login:
     response = self.opener.open(request)
     obj = json.loads(response.read().decode())
     self.gnamelist = obj['result']['gnamelist']
+    
+  # 获取在线好友列表
+  def getFriends(self):
+    url = api['friends'] + '?vfwebqq=' + str(self.vfwebqq) + '&clientid=53999199&psessionid=' + self.psessionid + '&t=' + str(time.time())
+    request = urllib.request.Request(url, headers={
+        'Referer': 'http://d1.web2.qq.com/proxy.html?v=20151105001&callback=1&id=2',
+        'User-Agent': USER_AGENT,
+    })
+    response = self.opener.open(request)
+    obj = json.loads(response.read().decode())
+    self.friends = obj['result']
   
   def loginSuccess(self):
     # 发送数据
     item = getGName(self.gnamelist, 'M|D|Z|Z')
     data = urllib.parse.urlencode({
       'r': '{"group_uin":' + str(item['gid']) + ',"content":"' +
-           '[\\"（该条信息通过python发送。）\\",[\\"font\\",{\\"name\\":\\"宋体\\",\\"size\\":10,\\"style\\":[0,0,0],\\"color\\":\\"000000\\"}]]",' +
+           '[\\"（123456）\\",[\\"font\\",{\\"name\\":\\"宋体\\",\\"size\\":10,\\"style\\":[0,0,0],\\"color\\":\\"000000\\"}]]",' +
            '"face":333,"clientid":53999199,"msg_id":' + str(msgId()) + ',"psessionid":"' + self.psessionid + '"}',
     })
     request = urllib.request.Request(api['send'], data=data.encode('utf-8'), headers={
@@ -274,5 +286,6 @@ class Login:
     """
   
   def initSuccess(self):
+    self.getFriends()
     self.getGroup()
     self.loginSuccess()

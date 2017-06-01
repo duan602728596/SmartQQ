@@ -30,6 +30,10 @@ api = {
   # 请求方式post
   'group': 'http://s.web2.qq.com/api/get_group_name_list_mask2',
   
+  # 获取在线好友列表
+  # 请求方式post
+  'friends': 'http://d1.web2.qq.com/channel/get_online_buddies2',
+  
   # 发送数据接口
   # 请求方式：post
   'send': 'https://d1.web2.qq.com/channel/send_qun_msg2',
