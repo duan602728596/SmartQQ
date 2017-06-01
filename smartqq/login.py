@@ -269,7 +269,7 @@ class Login:
   # 获取数据
   def getMessage(self):
     data = urllib.parse.urlencode({
-      'r': '{"ptwebqq": "' + self.ptwebqq + '", "clientid": 53999199, "psessionid": "' + self.psessionid + '", "key": ""}'
+      'r': '{"ptwebqq": "' + self.ptwebqq + '", "clientid": 53999199, "psessionid": "' + self.psessionid + '", "key": ""}',
     })
     request = urllib.request.Request(api['poll2'], data=data.encode('utf-8'), headers={
       'Content-Type': 'application/x-www-form-urlencoded',
