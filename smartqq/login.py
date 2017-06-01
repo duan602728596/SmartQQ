@@ -156,7 +156,6 @@ class Login:
   
   # 判断登录状态
   def isLogin(self):
-    RE = re.compile(r'[^\'",()]+', re.I)
     request = urllib.request.Request(api['isLogin'] + str(self.token), headers={
       'Connection': 'keep-alive',
       'User-Agent': USER_AGENT,
@@ -168,6 +167,7 @@ class Login:
     【1】：二维码状态，未失效->66，失效->65
     【4】：文字提示：未失效->'二维码未失效。'
     """
+    RE = re.compile(r'[^\'",()]+', re.I)
     res = response.read().decode()
     res2 = RE.findall(res)
 
