@@ -74,7 +74,7 @@ class Login:
   def timerLogin(self):
     if self.state == 0:
       self.isLogin()
-      self.timer = threading.Timer(1, self.timerLogin)
+      self.timer = threading.Timer(500, self.timerLogin)
       self.timer.start()
 
   # 取出ptwebqq
