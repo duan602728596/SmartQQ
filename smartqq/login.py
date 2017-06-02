@@ -11,7 +11,7 @@ from PyQt5 import QtGui
 from smartqq.api import api
 from smartqq.calculation import hash33, hash, getCookie, getGName, msgId
 
-USER_AGENT = 'user-agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'
   
 # 登录
 class Login:
