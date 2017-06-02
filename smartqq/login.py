@@ -16,27 +16,27 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, li
 # 登录
 class Login:
   def __init__(self, window):
-    self.cookiejar = http.cookiejar.CookieJar()      # cookiejar
-    self.opener = urllib.request.build_opener(       # opener
+    self.cookiejar = http.cookiejar.CookieJar()       # cookiejar
+    self.opener = urllib.request.build_opener(        # opener
                   urllib.request.HTTPCookieProcessor(self.cookiejar))
     
-    self.token = None                                # 二维码登录令牌
-    self.image = None                                # 二维码
+    self.token = None                                 # 二维码登录令牌
+    self.image = None                                 # 二维码
     
-    self.name = None                                 # 登录的用户名
-    self.ptwebqq = None                              # ptwebqq
-    self.vfwebqq = None                              # vfwebqq
-    self.psessionid = None                           # psessionid
-    self.uin = None                                  # uin
-    self.cip = None                                  # cip
+    self.name = None                                  # 登录的用户名
+    self.ptwebqq = None                               # ptwebqq
+    self.vfwebqq = None                               # vfwebqq
+    self.psessionid = None                            # psessionid
+    self.uin = None                                   # uin
+    self.cip = None                                   # cip
     
-    self.gnamelist = None                            # 获取群列表
-    self.friends = None                              # 获取在线好友列表
+    self.gnamelist = None                             # 获取群列表
+    self.friends = None                               # 获取在线好友列表
     
-    self.state = 0                                   # 当前登录状态
-    self.timer = threading.Timer(1, self.timerLogin) # 当前定时器
+    self.state = 0                                    # 当前登录状态
+    self.timer = threading.Timer(.5, self.timerLogin) # 当前定时器
     
-    self.window = window                             # window窗口实例
+    self.window = window                              # window窗口实例
 
   ### 这部分用于二维码相关
 
