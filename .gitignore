@@ -3,6 +3,7 @@ __pycache__
 .idea/*
 .cache/*.png
 .cache/config
+.cache/log
 build
 dist
 start.spec
